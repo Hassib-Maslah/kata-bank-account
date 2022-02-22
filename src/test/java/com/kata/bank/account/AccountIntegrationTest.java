@@ -32,4 +32,15 @@ public class AccountIntegrationTest {
         assertThat(response.getBody()).isEqualTo(Boolean.TRUE);
     }
 
+    @Test
+    public void makeWithdrawal_returnsTrue() {
+        // arrange
+        WithdrawRequest request = new WithdrawRequest(100L);
+        // act
+        ResponseEntity<Boolean> response = testRestTemplate.postForEntity("/account-management/withdraw", request, Boolean.class);
+        // assert
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isEqualTo(Boolean.TRUE);
+    }
+
 }
