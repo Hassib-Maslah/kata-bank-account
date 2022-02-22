@@ -2,7 +2,7 @@ package com.kata.bank.account.application.rest;
 
 import com.kata.bank.account.application.mapper.AccountMapper;
 import com.kata.bank.account.application.request.DepositRequest;
-import com.kata.bank.account.application.request.StatementResponse;
+import com.kata.bank.account.application.response.StatementResponse;
 import com.kata.bank.account.application.request.WithdrawRequest;
 import com.kata.bank.account.domain.service.AccountService;
 import org.springframework.http.ResponseEntity;

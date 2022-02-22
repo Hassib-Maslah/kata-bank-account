@@ -1,4 +1,4 @@
-package com.kata.bank.account.application.request;
+package com.kata.bank.account.application.response;
 
 import com.kata.bank.account.application.enums.OperationEnum;
 

@@ -1,6 +1,6 @@
 package com.kata.bank.account.application.mapper;
 
-import com.kata.bank.account.application.request.StatementResponse;
+import com.kata.bank.account.application.response.StatementResponse;
 import com.kata.bank.account.domain.Statement;
 import org.modelmapper.ModelMapper;
 
