@@ -5,12 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public abstract class JsonUtils {
 
-    public static byte[] toJson(Object o) {
+    public static byte[] toJson(Object o) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        try {
-            return mapper.writeValueAsBytes(o);
-        } catch (JsonProcessingException e) {
-           return new byte[] {};
-        }
+        return mapper.writeValueAsBytes(o);
     }
 }

@@ -1,4 +1,4 @@
-package com.kata.bank.account.domain.model;
+package com.kata.bank.account.domain;
 
 public class DepositRequest {
 
