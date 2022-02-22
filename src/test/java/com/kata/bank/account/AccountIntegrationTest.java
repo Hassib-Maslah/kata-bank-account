@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
@@ -42,6 +44,17 @@ public class AccountIntegrationTest {
         // assert
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(Boolean.TRUE);
+    }
+
+    @Test
+    public void getStatement_returnsAccountStatement() {
+        // arrange
+
+        // act
+        ResponseEntity<List<Statement>> response = testRestTemplate.getForEntity("/account-management/statement", Statement.class);
+        // assert
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody().isEmpty()).isFalse();
     }
 
 }
