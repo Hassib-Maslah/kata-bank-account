@@ -50,7 +50,7 @@ public class AccountControllerTest {
 
         WithdrawRequest request = new WithdrawRequest(100L);
 
-        mockMvc.perform(post("/account-management/deposit")
+        mockMvc.perform(post("/account-management/withdraw")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(JsonUtils.toJson(request))
                 )
