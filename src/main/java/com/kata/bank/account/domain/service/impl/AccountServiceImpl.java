@@ -32,6 +32,8 @@ public class AccountServiceImpl implements AccountService {
         account.setAmount(account.getAmount() + depositRequest.getAmount());
         // persist the account
         saveAccount(account);
+        // save the operation
+        saveStatement(account.getAmount(), depositRequest.getAmount(), Operation.DEPOSIT);
 
         return true;
     }
@@ -50,6 +52,8 @@ public class AccountServiceImpl implements AccountService {
         account.setAmount(account.getAmount() - withdrawRequest.getAmount());
         // persist the account
         saveAccount(account);
+        // save the operation
+        saveStatement(account.getAmount(), withdrawRequest.getAmount(), Operation.WITHDRAW);
 
         return true;
     }
@@ -63,6 +67,13 @@ public class AccountServiceImpl implements AccountService {
     public Account saveAccount(Account account) {
         this.account = account;
         return this.account;
+    }
+
+    @Override
+    public Statement saveStatement(Long balance, Long amount, Operation operation) {
+        Statement statement = new Statement(operation, LocalDateTime.now(), amount, balance);
+        statements.add(statement);
+        return statement;
     }
 
     @Override
