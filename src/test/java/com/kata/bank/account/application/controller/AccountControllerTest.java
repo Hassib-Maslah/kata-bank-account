@@ -68,14 +68,14 @@ public class AccountControllerTest {
     @Test
     public void getStatements_shouldReturnsAccountStatements() throws Exception {
         List<Statement> statements = new ArrayList<>();
-        statements.add(new Statement(Operation.DEPOSIT, LocalDateTime.now(), 100L, accountService.getAccount().getAmount()));
+        statements.add(new Statement(Operation.DEPOSIT, LocalDateTime.now(), 100L, 100L));
 
         given(accountService.getStatements()).willReturn(statements);
 
         mockMvc.perform(get("/account-management/statements"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
-                .andExpect(jsonPath("$.[0].operation").value(Operation.DEPOSIT))
+                .andExpect(jsonPath("$.[0].operation").value(Operation.DEPOSIT.name()))
                 .andExpect(jsonPath("$.[0].amount").value(100L));
     }
 
