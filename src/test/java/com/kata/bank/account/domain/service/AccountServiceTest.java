@@ -1,6 +1,8 @@
 package com.kata.bank.account.domain.service;
 
+import com.kata.bank.account.domain.Account;
 import com.kata.bank.account.domain.DepositRequest;
+import com.kata.bank.account.domain.service.impl.AccountServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,6 +31,8 @@ public class AccountServiceTest {
 
     @Test
     void shouldMakeDeposit_thenReturnTrue() {
+        accountService.saveAccount(new Account("James", 0L));
+
         DepositRequest depositRequest = new DepositRequest(100L);
 
         boolean result = accountService.makeDeposit(depositRequest);
