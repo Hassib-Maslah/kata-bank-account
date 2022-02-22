@@ -1,20 +1,18 @@
 package com.kata.bank.account;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.kata.bank.account.application.controller.AccountController;
 import com.kata.bank.account.domain.model.DepositRequest;
-import org.junit.jupiter.api.DisplayName;
+import com.kata.bank.account.infrastracture.utils.JsonUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -28,12 +26,12 @@ public class AccountControllerTest {
     public void makeDeposit_shouldReturnsTrue() throws Exception {
         DepositRequest request = new DepositRequest(100L);
 
-        ObjectMapper mapper = new ObjectMapper();
-        String requestJson = mapper.writeValueAsString(request);
-
-        mockMvc.perform(MockMvcRequestBuilders.post("/account-management/deposit").content(requestJson))
+        mockMvc.perform(post("/account-management/deposit")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(JsonUtils.toJson(request))
+                )
                 .andExpect(status().isOk())
-                .andExpect(content().json(String.valueOf(Boolean.TRUE)));
+                .andExpect(jsonPath("$").value(Boolean.TRUE));
     }
 
 

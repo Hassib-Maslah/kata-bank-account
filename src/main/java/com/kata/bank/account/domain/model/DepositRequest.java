@@ -4,6 +4,9 @@ public class DepositRequest {
 
     private Long amount;
 
+    public DepositRequest() {
+    }
+
     public DepositRequest(Long amount) {
         this.amount = amount;
     }
