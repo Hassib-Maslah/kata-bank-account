@@ -54,4 +54,15 @@ public class AccountServiceTest {
         assertThat(accountService.getAccount().getAmount()).isEqualTo(50L);
     }
 
+    @Test
+    void shouldNotMakeWithdrawal_thenReturnFalse() {
+        // arrange
+        WithdrawRequest withdrawRequest = new WithdrawRequest(100L);
+        // act
+        boolean result = accountService.makeWithdrawal(withdrawRequest);
+        // assert
+        assertThat(result).isFalse();
+        assertThat(accountService.getAccount().getAmount()).isEqualTo(0L);
+    }
+
 }
