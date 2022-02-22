@@ -20,19 +20,17 @@ public class AccountServiceTest {
 
     @Test
     void shouldCreateAccount_thenSaveIt() {
-        Account account = new Account("James", 0L);
+        Account account = new Account("Jordan", 150L);
 
         Account savedAccount = accountService.saveAccount(account);
 
         assertNotNull(savedAccount);
-        assertThat(savedAccount.getHolder()).isEqualTo("James");
-        assertThat(savedAccount.getAmount()).isEqualTo(0L);
+        assertThat(savedAccount.getHolder()).isEqualTo("Jordan");
+        assertThat(savedAccount.getAmount()).isEqualTo(150L);
     }
 
     @Test
     void shouldMakeDeposit_thenReturnTrue() {
-        accountService.saveAccount(new Account("James", 0L));
-
         DepositRequest depositRequest = new DepositRequest(100L);
 
         boolean result = accountService.makeDeposit(depositRequest);
