@@ -1,4 +1,4 @@
-package com.kata.bank.account;
+package com.kata.bank.account.application.controller;
 
 import com.kata.bank.account.application.controller.AccountController;
 import com.kata.bank.account.domain.DepositRequest;

@@ -1,4 +1,4 @@
-package com.kata.bank.account;
+package com.kata.bank.account.application;
 
 import com.kata.bank.account.domain.DepositRequest;
 import org.junit.jupiter.api.DisplayName;
