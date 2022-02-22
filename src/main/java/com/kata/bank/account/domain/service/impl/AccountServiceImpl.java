@@ -5,7 +5,12 @@ import com.kata.bank.account.domain.DepositRequest;
 import com.kata.bank.account.domain.service.AccountService;
 
 public class AccountServiceImpl implements AccountService {
-    private static Account account;
+
+    private Account account;
+
+    {
+        account = new Account("James", 0L);
+    }
 
     @Override
     public boolean makeDeposit(DepositRequest depositRequest) {
@@ -27,9 +32,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account saveAccount(Account accountToSave) {
-        account = accountToSave;
-        return account;
+    public Account saveAccount(Account account) {
+        this.account = account;
+        return this.account;
     }
 
 }
