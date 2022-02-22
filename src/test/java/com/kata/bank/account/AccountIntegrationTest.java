@@ -1,6 +1,7 @@
 package com.kata.bank.account;
 
 import com.kata.bank.account.domain.DepositRequest;
+import com.kata.bank.account.domain.WithdrawRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
