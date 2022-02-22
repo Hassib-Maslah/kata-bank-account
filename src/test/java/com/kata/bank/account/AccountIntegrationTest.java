@@ -2,7 +2,6 @@ package com.kata.bank.account;
 
 import com.kata.bank.account.domain.DepositRequest;
 import com.kata.bank.account.domain.WithdrawRequest;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,11 +46,11 @@ public class AccountIntegrationTest {
     }
 
     @Test
-    public void getStatement_returnsAccountStatement() {
+    public void getStatements_returnsAccountStatements() {
         // arrange
 
         // act
-        ResponseEntity<List<Statement>> response = testRestTemplate.getForEntity("/account-management/statement", Statement.class);
+        ResponseEntity<List> response = testRestTemplate.getForEntity("/account-management/statements", List.class);
         // assert
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody().isEmpty()).isFalse();

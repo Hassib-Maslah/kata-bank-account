@@ -1,8 +1,9 @@
 package com.kata.bank.account.application.controller;
 
-import com.kata.bank.account.application.controller.AccountController;
 import com.kata.bank.account.domain.DepositRequest;
+import com.kata.bank.account.domain.Statement;
 import com.kata.bank.account.domain.WithdrawRequest;
+import com.kata.bank.account.domain.enums.Operation;
 import com.kata.bank.account.domain.service.AccountService;
 import com.kata.bank.account.infrastracture.utils.JsonUtils;
 import org.junit.jupiter.api.Test;
@@ -14,8 +15,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -58,5 +64,20 @@ public class AccountControllerTest {
                 .andExpect(jsonPath("$").value(Boolean.TRUE));
     }
 
+
+    @Test
+    public void getStatements_shouldReturnsAccountStatements() throws Exception {
+        List<Statement> statements = new ArrayList<>();
+        statements.add(new Statement(Operation.DEPOSIT, LocalDateTime.now(), 100L, accountService.getAccount().getAmount()));
+        given(accountService.getStatements()).willReturn(statements);
+
+        WithdrawRequest request = new WithdrawRequest(100L);
+
+        mockMvc.perform(get("/account-management/statements"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$.[0].operation").value(Operation.DEPOSIT))
+                .andExpect(jsonPath("$.[0].amount").value(100L));
+    }
 
 }
