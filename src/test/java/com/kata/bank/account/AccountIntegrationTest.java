@@ -1,7 +1,7 @@
 package com.kata.bank.account;
 
-import com.kata.bank.account.domain.DepositRequest;
-import com.kata.bank.account.domain.WithdrawRequest;
+import com.kata.bank.account.application.request.DepositRequest;
+import com.kata.bank.account.application.request.WithdrawRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

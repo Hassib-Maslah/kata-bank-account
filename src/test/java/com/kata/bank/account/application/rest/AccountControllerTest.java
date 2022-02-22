@@ -1,8 +1,8 @@
-package com.kata.bank.account.application.controller;
+package com.kata.bank.account.application.rest;
 
-import com.kata.bank.account.domain.DepositRequest;
+import com.kata.bank.account.application.request.DepositRequest;
 import com.kata.bank.account.domain.Statement;
-import com.kata.bank.account.domain.WithdrawRequest;
+import com.kata.bank.account.application.request.WithdrawRequest;
 import com.kata.bank.account.domain.enums.Operation;
 import com.kata.bank.account.domain.service.AccountService;
 import com.kata.bank.account.infrastracture.utils.JsonUtils;
