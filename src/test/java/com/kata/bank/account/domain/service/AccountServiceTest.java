@@ -9,7 +9,6 @@ import com.kata.bank.account.domain.service.impl.AccountServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -72,9 +71,9 @@ public class AccountServiceTest {
     @Test
     void shouldCreateStatement_thenSaveIt() {
         // arrange
-        Statement statement = new Statement(Operation.DEPOSIT, LocalDateTime.now(), 100L, 100L);
+
         // act
-        Statement savedStatement = accountService.saveStatement(statement);
+        Statement savedStatement = accountService.saveStatement(100L, 100L, Operation.DEPOSIT);
         // assert
         assertNotNull(savedStatement);
         assertThat(savedStatement.getOperation()).isEqualTo(Operation.DEPOSIT);
