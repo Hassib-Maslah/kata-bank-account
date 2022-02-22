@@ -2,6 +2,7 @@ package com.kata.bank.account.domain.service;
 
 import com.kata.bank.account.domain.Account;
 import com.kata.bank.account.domain.DepositRequest;
+import com.kata.bank.account.domain.WithdrawRequest;
 import com.kata.bank.account.domain.service.impl.AccountServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,6 +40,18 @@ public class AccountServiceTest {
         // assert
         assertThat(result).isTrue();
         assertThat(accountService.getAccount().getAmount()).isEqualTo(100L);
+    }
+
+    @Test
+    void shouldMakeWithdrawal_thenReturnTrue() {
+        // arrange
+        accountService.saveAccount(new Account("Jordan", 150L));
+        WithdrawRequest withdrawRequest = new WithdrawRequest(100L);
+        // act
+        boolean result = accountService.makeWithdrawal(withdrawRequest);
+        // assert
+        assertThat(result).isTrue();
+        assertThat(accountService.getAccount().getAmount()).isEqualTo(50L);
     }
 
 }
