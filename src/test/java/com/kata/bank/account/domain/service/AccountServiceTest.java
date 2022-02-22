@@ -3,12 +3,10 @@ package com.kata.bank.account.domain.service;
 import com.kata.bank.account.domain.DepositRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@ExtendWith(MockitoExtension.class)
 public class AccountServiceTest {
 
     private AccountService accountService;
@@ -16,6 +14,17 @@ public class AccountServiceTest {
     @BeforeEach
     void setUp() {
         accountService = new AccountServiceImpl();
+    }
+
+    @Test
+    void shouldCreateAccount_thenSaveIt() {
+        Account account = new Account("James", 0L);
+
+        Account savedAccount = accountService.saveAccount(account);
+
+        assertNotNull(savedAccount);
+        assertThat(savedAccount.getHolder()).isEqualTo("James");
+        assertThat(savedAccount.getAmount()).isEqualTo(0L);
     }
 
     @Test
@@ -27,4 +36,5 @@ public class AccountServiceTest {
         assertThat(result).isTrue();
         assertThat(accountService.getAccount().getAmount()).isEqualTo(100L);
     }
+
 }
