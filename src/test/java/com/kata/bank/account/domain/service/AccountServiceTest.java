@@ -2,10 +2,14 @@ package com.kata.bank.account.domain.service;
 
 import com.kata.bank.account.domain.Account;
 import com.kata.bank.account.domain.DepositRequest;
+import com.kata.bank.account.domain.Statement;
 import com.kata.bank.account.domain.WithdrawRequest;
+import com.kata.bank.account.domain.enums.Operation;
 import com.kata.bank.account.domain.service.impl.AccountServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -62,6 +66,18 @@ public class AccountServiceTest {
         // assert
         assertThat(result).isFalse();
         assertThat(accountService.getAccount().getAmount()).isEqualTo(100L);
+    }
+
+    @Test
+    void shouldGetStatements_thenReturnAccountStatements() {
+        // arrange
+
+        // act
+        List<Statement> result = accountService.getStatements();
+        // assert
+        assertThat(result.isEmpty()).isFalse();
+        assertThat(result.get(0).getOperation()).isEqualTo(Operation.DEPOSIT);
+        assertThat(result.get(0).getAmount()).isEqualTo(100L);
     }
 
 }

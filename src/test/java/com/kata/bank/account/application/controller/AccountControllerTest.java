@@ -69,9 +69,8 @@ public class AccountControllerTest {
     public void getStatements_shouldReturnsAccountStatements() throws Exception {
         List<Statement> statements = new ArrayList<>();
         statements.add(new Statement(Operation.DEPOSIT, LocalDateTime.now(), 100L, accountService.getAccount().getAmount()));
-        given(accountService.getStatements()).willReturn(statements);
 
-        WithdrawRequest request = new WithdrawRequest(100L);
+        given(accountService.getStatements()).willReturn(statements);
 
         mockMvc.perform(get("/account-management/statements"))
                 .andExpect(status().isOk())
