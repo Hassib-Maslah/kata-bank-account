@@ -2,7 +2,10 @@ package com.kata.bank.account.domain.service;
 
 import com.kata.bank.account.domain.Account;
 import com.kata.bank.account.domain.DepositRequest;
+import com.kata.bank.account.domain.Statement;
 import com.kata.bank.account.domain.WithdrawRequest;
+
+import java.util.List;
 
 public interface AccountService {
 
@@ -14,4 +17,5 @@ public interface AccountService {
 
     Account saveAccount(Account account);
 
+    List<Statement> getStatements();
 }
