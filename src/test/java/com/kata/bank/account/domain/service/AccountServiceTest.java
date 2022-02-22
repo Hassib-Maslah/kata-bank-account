@@ -39,14 +39,13 @@ public class AccountServiceTest {
         boolean result = accountService.makeDeposit(depositRequest);
         // assert
         assertThat(result).isTrue();
-        assertThat(accountService.getAccount().getAmount()).isEqualTo(100L);
+        assertThat(accountService.getAccount().getAmount()).isEqualTo(200L);
     }
 
     @Test
     void shouldMakeWithdrawal_thenReturnTrue() {
         // arrange
-        accountService.saveAccount(new Account("Jordan", 150L));
-        WithdrawRequest withdrawRequest = new WithdrawRequest(100L);
+        WithdrawRequest withdrawRequest = new WithdrawRequest(50L);
         // act
         boolean result = accountService.makeWithdrawal(withdrawRequest);
         // assert
@@ -57,12 +56,12 @@ public class AccountServiceTest {
     @Test
     void shouldNotMakeWithdrawal_thenReturnFalse() {
         // arrange
-        WithdrawRequest withdrawRequest = new WithdrawRequest(100L);
+        WithdrawRequest withdrawRequest = new WithdrawRequest(500L);
         // act
         boolean result = accountService.makeWithdrawal(withdrawRequest);
         // assert
         assertThat(result).isFalse();
-        assertThat(accountService.getAccount().getAmount()).isEqualTo(0L);
+        assertThat(accountService.getAccount().getAmount()).isEqualTo(100L);
     }
 
 }

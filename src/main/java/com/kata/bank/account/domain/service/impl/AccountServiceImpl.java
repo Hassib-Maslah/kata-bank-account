@@ -10,7 +10,7 @@ public class AccountServiceImpl implements AccountService {
     private Account account;
 
     {
-        account = new Account("James", 0L);
+        account = new Account("James", 100L);
     }
 
     @Override
