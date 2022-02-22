@@ -2,6 +2,7 @@ package com.kata.bank.account.application.controller;
 
 import com.kata.bank.account.application.controller.AccountController;
 import com.kata.bank.account.domain.DepositRequest;
+import com.kata.bank.account.domain.WithdrawRequest;
 import com.kata.bank.account.domain.service.AccountService;
 import com.kata.bank.account.infrastracture.utils.JsonUtils;
 import org.junit.jupiter.api.Test;
@@ -34,6 +35,20 @@ public class AccountControllerTest {
         given(accountService.makeDeposit(any())).willReturn(Boolean.TRUE);
 
         DepositRequest request = new DepositRequest(100L);
+
+        mockMvc.perform(post("/account-management/deposit")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(JsonUtils.toJson(request))
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").value(Boolean.TRUE));
+    }
+
+    @Test
+    public void makeWithdrawal_shouldReturnsTrue() throws Exception {
+        given(accountService.makeWithdrawal(any())).willReturn(Boolean.TRUE);
+
+        WithdrawRequest request = new WithdrawRequest(100L);
 
         mockMvc.perform(post("/account-management/deposit")
                         .contentType(MediaType.APPLICATION_JSON)
