@@ -1,9 +1,7 @@
 package com.kata.bank.account.domain.service.impl;
 
 import com.kata.bank.account.domain.Account;
-import com.kata.bank.account.domain.DepositRequest;
 import com.kata.bank.account.domain.Statement;
-import com.kata.bank.account.domain.WithdrawRequest;
 import com.kata.bank.account.domain.enums.Operation;
 import com.kata.bank.account.domain.service.AccountService;
 
@@ -23,37 +21,37 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public boolean makeDeposit(DepositRequest depositRequest) {
+    public boolean makeDeposit(Long amount) {
         Account account = getAccount();
         if (account == null) {
             return false;
         }
         // sum account balance and the amount
-        account.setAmount(account.getAmount() + depositRequest.getAmount());
+        account.setAmount(account.getAmount() + amount);
         // persist the account
         saveAccount(account);
         // save the operation
-        saveStatement(account.getAmount(), depositRequest.getAmount(), Operation.DEPOSIT);
+        saveStatement(account.getAmount(), amount, Operation.DEPOSIT);
 
         return true;
     }
 
     @Override
-    public boolean makeWithdrawal(WithdrawRequest withdrawRequest) {
+    public boolean makeWithdrawal(Long amount) {
         Account account = getAccount();
         if (account == null) {
             return false;
         }
         // check available balance
-        if (account.getAmount() < withdrawRequest.getAmount()) {
+        if (account.getAmount() < amount) {
             return false;
         }
         // sum account balance and the amount
-        account.setAmount(account.getAmount() - withdrawRequest.getAmount());
+        account.setAmount(account.getAmount() - amount);
         // persist the account
         saveAccount(account);
         // save the operation
-        saveStatement(account.getAmount(), withdrawRequest.getAmount(), Operation.WITHDRAW);
+        saveStatement(account.getAmount(), amount, Operation.WITHDRAW);
 
         return true;
     }

@@ -1,9 +1,7 @@
 package com.kata.bank.account.domain.service;
 
 import com.kata.bank.account.domain.Account;
-import com.kata.bank.account.domain.DepositRequest;
 import com.kata.bank.account.domain.Statement;
-import com.kata.bank.account.domain.WithdrawRequest;
 import com.kata.bank.account.domain.enums.Operation;
 import com.kata.bank.account.domain.service.impl.AccountServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,9 +36,9 @@ public class AccountServiceTest {
     @Test
     void shouldMakeDeposit_thenReturnTrue() {
         // arrange
-        DepositRequest depositRequest = new DepositRequest(100L);
+        long amount = 100;
         // act
-        boolean result = accountService.makeDeposit(depositRequest);
+        boolean result = accountService.makeDeposit(amount);
         // assert
         assertThat(result).isTrue();
         assertThat(accountService.getAccount().getAmount()).isEqualTo(200L);
@@ -49,20 +47,20 @@ public class AccountServiceTest {
     @Test
     void shouldMakeWithdrawal_thenReturnTrue() {
         // arrange
-        WithdrawRequest withdrawRequest = new WithdrawRequest(50L);
+        long amount = 50;
         // act
-        boolean result = accountService.makeWithdrawal(withdrawRequest);
+        boolean result = accountService.makeWithdrawal(amount);
         // assert
         assertThat(result).isTrue();
-        assertThat(accountService.getAccount().getAmount()).isEqualTo(50L);
+        assertThat(accountService.getAccount().getAmount()).isEqualTo(amount);
     }
 
     @Test
     void shouldNotMakeWithdrawal_thenReturnFalse() {
         // arrange
-        WithdrawRequest withdrawRequest = new WithdrawRequest(500L);
+        long amount = 500;
         // act
-        boolean result = accountService.makeWithdrawal(withdrawRequest);
+        boolean result = accountService.makeWithdrawal(amount);
         // assert
         assertThat(result).isFalse();
         assertThat(accountService.getAccount().getAmount()).isEqualTo(100L);

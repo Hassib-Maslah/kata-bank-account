@@ -1,18 +1,16 @@
 package com.kata.bank.account.domain.service;
 
 import com.kata.bank.account.domain.Account;
-import com.kata.bank.account.domain.DepositRequest;
 import com.kata.bank.account.domain.Statement;
-import com.kata.bank.account.domain.WithdrawRequest;
 import com.kata.bank.account.domain.enums.Operation;
 
 import java.util.List;
 
 public interface AccountService {
 
-    boolean makeDeposit(DepositRequest depositRequest);
+    boolean makeDeposit(Long amount);
 
-    boolean makeWithdrawal(WithdrawRequest withdrawRequest);
+    boolean makeWithdrawal(Long amount);
 
     Account getAccount();
 

@@ -1,4 +1,4 @@
-package com.kata.bank.account.domain;
+package com.kata.bank.account.application.request;
 
 public class WithdrawRequest {
     private Long amount;
